@@ -3,7 +3,7 @@ import axios from "axios";
 import { kea, useActions, useValues } from "kea";
 import { cx } from "@emotion/css";
 
-import { logicType } from "./ProjectsType";
+import { logicType } from "../types/components/ProjectsType";
 
 interface T_ProjectUrl {
   url: string;
