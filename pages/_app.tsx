@@ -1,6 +1,9 @@
 import "tailwindcss/tailwind.css";
 import { injectGlobal } from "@emotion/css";
 import colors from "tailwindcss/colors";
+import { resetContext, getContext } from "kea"; // 👈 add this
+import { Provider } from "react-redux"; // 👈 add this
+import { loadersPlugin } from "kea-loaders";
 
 injectGlobal`
 body {
@@ -18,8 +21,20 @@ body {
 }
 `;
 
+resetContext({
+  // 👈 add this
+  createStore: {
+    // options for redux (e.g. middleware, reducers, ...)
+  },
+  plugins: [loadersPlugin()],
+});
+
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={getContext().store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 export default MyApp;
